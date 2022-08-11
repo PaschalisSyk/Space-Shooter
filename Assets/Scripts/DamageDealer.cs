@@ -5,6 +5,12 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] int damage = 10;
+    Health health;
+
+    private void Awake()
+    {
+        health = FindObjectOfType<Health>();
+    }
 
     public int GetDamage()
     {
@@ -13,6 +19,13 @@ public class DamageDealer : MonoBehaviour
     
     public void Hit()
     {
-        Destroy(gameObject);
+        if(health.isPlayer)
+        {
+            health.Destruction();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

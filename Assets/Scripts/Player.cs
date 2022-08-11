@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     Vector2 rawInput;
 
     Shooter shooter;
+    public bool shieldied;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shieldied = false;
         SetUpMoveBoundaries();
     }
 
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        Shielded();
         //Fire();
         
     }
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
         Vector2 delta = rawInput * moveSpeed * Time.deltaTime;
         Vector2 newPos = new Vector2();
         newPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + padding, maxBounds.x - padding);
-        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + padding *4, maxBounds.y - padding * 10);
+        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + padding *3, maxBounds.y - padding * 10);
         transform.position = newPos;
 
     }
@@ -73,4 +76,15 @@ public class Player : MonoBehaviour
         minBounds = gameCamera.ViewportToWorldPoint(new Vector2(0, 0));
         maxBounds = gameCamera.ViewportToWorldPoint(new Vector2(1, 1));
     }
+
+    void Shielded()
+    {
+        if (Keyboard.current[Key.Q].wasPressedThisFrame && !shieldied)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetComponentInChildren<Shield>().ShieldScale();
+            shieldied = true;
+        }
+    }
+
 }

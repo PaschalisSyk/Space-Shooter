@@ -5,25 +5,38 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] public bool isPlayer;
     [SerializeField] int health = 50;
+    [SerializeField] int score = 50;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] GameObject _shield;
 
     [SerializeField] bool applyCameraShake;
 
     CameraShake cameraShake;
     AudioPlayer audioPlayer;
+    ScoreKeeper scoreKeeper;
+    LevelManager levelManager;
+    Shield shield;
+    Player player;
+
 
     private void Awake()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        levelManager = FindObjectOfType<LevelManager>();
+        shield = FindObjectOfType<Shield>();
+        player = FindObjectOfType<Player>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
 
-        if(damageDealer != null)
+        if (damageDealer != null && !player.shieldied)
         {
             TakeDamage(damageDealer.GetDamage());
             audioPlayer.PlayDamageSound();
@@ -33,12 +46,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    void ShakeCamera()
+    public int GetHealth()
     {
-        if(cameraShake != null && applyCameraShake)
-        {
-            cameraShake.Play();
-        }
+        return health;
     }
 
     private void TakeDamage(int damage)
@@ -47,8 +57,23 @@ public class Health : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Destruction();
         }
+    }
+
+    public void Destruction()
+    {
+        if(!isPlayer)
+        {
+            scoreKeeper.ModifyScore(score);
+        }
+        else
+        {
+            health = 0;
+            levelManager.LoadGameOver();
+        }
+        Destroy(gameObject);
+
     }
 
     void PlayHitEffect()
@@ -59,4 +84,13 @@ public class Health : MonoBehaviour
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
+
+    void ShakeCamera()
+    {
+        if (cameraShake != null && applyCameraShake)
+        {
+            cameraShake.Play();
+        }
+    }
+
 }

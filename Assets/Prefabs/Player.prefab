@@ -150,7 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53781d4ecbe59874892884c2875cf522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   health: 50
+  score: 0
   hitEffect: {fileID: 4711078963350726575, guid: 80706d0cfbed3f8468779eba3e372507,
     type: 3}
   applyCameraShake: 1
@@ -182,7 +184,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 1629467150465319734, guid: 5581c2d366b5dec40b5b952872e38dfa,
     type: 3}
   projectileSpeed: 10
-  baseProjectileFiringPeriod: 0.2
+  baseProjectileFiringPeriod: 0.5
   projectileLifeTime: 5
   useAI: 0
   firingRangeVariance: 0
