@@ -33,17 +33,23 @@ public class Health : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+        print(other.gameObject.name);
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
 
-        if (damageDealer != null && !player.shieldied)
+        if (damageDealer != null)
         {
-            TakeDamage(damageDealer.GetDamage());
-            audioPlayer.PlayDamageSound();
-            PlayHitEffect();
-            ShakeCamera();
-            damageDealer.Hit();
+            TakeHit(damageDealer);
         }
+
+    }
+
+    public void TakeHit(DamageDealer damageDealer)
+    {
+        TakeDamage(damageDealer.GetDamage());
+        audioPlayer.PlayDamageSound();
+        PlayHitEffect();
+        ShakeCamera();
+        damageDealer.Hit();
     }
 
     public int GetHealth()

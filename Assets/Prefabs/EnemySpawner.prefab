@@ -43,10 +43,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612815f71a608544d9f32aa91d465db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listWavesList:
+    wavesList:
+    - _waves:
+      - {fileID: 11400000, guid: 728a26af948c3b14483e10963cf304c2, type: 2}
+      - {fileID: 11400000, guid: 0cfb505c4ff103d42a7cecfd980ed641, type: 2}
+      - {fileID: 11400000, guid: 4cbc58db6e010884d9d7caac3813de3f, type: 2}
+      - {fileID: 11400000, guid: 097ffc2ef803c0d4dbe27a47dc9193d8, type: 2}
+      - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+      - {fileID: 11400000, guid: 1d41ed7e7452fca4291ad737c5fb9bbe, type: 2}
+    - _waves:
+      - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+      - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+      - {fileID: 11400000, guid: 1d41ed7e7452fca4291ad737c5fb9bbe, type: 2}
   waveConfigs:
-  - {fileID: 11400000, guid: 728a26af948c3b14483e10963cf304c2, type: 2}
+  - {fileID: 11400000, guid: 0cfb505c4ff103d42a7cecfd980ed641, type: 2}
   - {fileID: 11400000, guid: 0cfb505c4ff103d42a7cecfd980ed641, type: 2}
   - {fileID: 11400000, guid: 4cbc58db6e010884d9d7caac3813de3f, type: 2}
   - {fileID: 11400000, guid: 097ffc2ef803c0d4dbe27a47dc9193d8, type: 2}
+  - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+  - {fileID: 11400000, guid: 1d41ed7e7452fca4291ad737c5fb9bbe, type: 2}
+  wave2:
+  - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+  - {fileID: 11400000, guid: 87607b96f26f32843bdd9646e926861c, type: 2}
+  - {fileID: 11400000, guid: 097ffc2ef803c0d4dbe27a47dc9193d8, type: 2}
   startingWave: 0
   looping: 1
+  Level: 0
+  topEnemiesSpawner: {fileID: 2795243413458308416, guid: 15ff2edfd096b9640ba73aeec2fdad46,
+    type: 3}

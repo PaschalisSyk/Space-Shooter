@@ -45,4 +45,5 @@ public class EnemyPathing : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

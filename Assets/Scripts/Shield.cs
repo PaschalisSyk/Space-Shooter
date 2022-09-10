@@ -7,39 +7,40 @@ using System;
 public class Shield : MonoBehaviour
 {
     int shieldHealth = 4;
-    CircleCollider2D circleCollider;
     Player player;
+    [SerializeField] ParticleSystem shieldEffect;
 
     private void Awake()
     {
-        circleCollider = GetComponent<CircleCollider2D>();
         player = FindObjectOfType<Player>();
 
     }
 
     void Start()
     {
-        //circleCollider.radius = 0.5f;
         ShieldScale();
     }
 
     public void ShieldScale()
     {
-        transform.DOScale(1.3f, 1f).SetEase(Ease.InCubic);
+        transform.DOScale(1.3f, 1f).SetEase(Ease.InFlash);
         StartCoroutine(Dissolve());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (shieldHealth <= 0)
+        {
+            Evaporate();
+        }
     }
 
     void Evaporate()
     {
-        transform.DOScale(0, 2).SetEase(Ease.InElastic, 1);
-        circleCollider.radius = Mathf.Lerp(0.5f, 0, 2f * Time.deltaTime);
-        Invoke("Deactivate", 3f);
+        transform.DOScale(0, 1f).SetEase(Ease.OutBack);
+        //circleCollider.radius = Mathf.Lerp(0.5f, 0, 2f * Time.deltaTime);
+        Invoke("Deactivate", 1.5f);
     }
 
     IEnumerator Dissolve()
@@ -50,29 +51,35 @@ public class Shield : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag == "EnemyLaser")
         {
             Destroy(collision.gameObject);
+            PlayShieldHitEffect();
             shieldHealth -= 1;
         }
 
         if (collision.gameObject.tag == "EnemyShip")
         {
+            DamageDealer damage = collision.GetComponent<DamageDealer>();
             Destroy(collision.gameObject);
+            player.GetComponent<Health>().TakeHit(damage);
             Deactivate();
         }
-
-        if (shieldHealth <= 0)
-        {
-            Evaporate();
-        }
     }
-
     void Deactivate()
     {
         gameObject.SetActive(false);
         player.shieldied = false;
+        shieldHealth = 4;
+    }
+
+    void PlayShieldHitEffect()
+    {
+        if (shieldEffect != null)
+        {
+            ParticleSystem instance = Instantiate(shieldEffect, transform.position, Quaternion.identity);
+            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+        }
     }
 
 }

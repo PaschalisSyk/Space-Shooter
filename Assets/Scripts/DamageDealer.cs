@@ -19,13 +19,10 @@ public class DamageDealer : MonoBehaviour
     
     public void Hit()
     {
-        if(health.isPlayer)
-        {
-            health.Destruction();
-        }
-        else
+        if(!health.isPlayer)
         {
             Destroy(gameObject);
         }
+
     }
 }

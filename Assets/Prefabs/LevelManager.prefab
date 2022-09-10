@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f68ec7f652a404697849eab239be2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoadDelay: 2
+  levelCount: 0
+  _spawner: {fileID: 3081769746417755930, guid: de0be8ac9653c774288d3715fbe5b817,
+    type: 3}
