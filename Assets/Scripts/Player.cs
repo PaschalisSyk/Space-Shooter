@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float padding = 1f;
 
@@ -16,12 +16,18 @@ public class Player : MonoBehaviour
 
     Vector2 rawInput;
 
+    Vector3 touchPosition;
+    Vector3 direction;
+
     Shooter shooter;
     public bool shieldied;
+
+    private float deltaX, deltaY;
 
     private void Awake()
     {
         shooter = GetComponent<Shooter>();
+        
     }
 
     // Start is called before the first frame update
@@ -36,6 +42,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Shielded();
+        Touch();
         //Fire();
         
     }
@@ -70,6 +77,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTouchPosition(InputValue value)
+    {
+        rawInput = value.Get<Vector2>();
+    }
+
+    private void OnTouchPress(InputValue value)
+    {
+        if (shooter != null)
+        {
+            shooter.isFiring = value.isPressed;
+        }
+    }
+
     private void SetUpMoveBoundaries()
     {
         Camera gameCamera = Camera.main;
@@ -85,6 +105,43 @@ public class Player : MonoBehaviour
             transform.GetComponentInChildren<Shield>().ShieldScale();
             shieldied = true;
         }
+    }
+
+    void Touch()
+    {
+        if (Input.touchCount > 0)
+        {
+
+            Touch touch = Input.GetTouch(0);
+            
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+            switch (touch.phase)
+            {
+                case UnityEngine.TouchPhase.Began:
+                    deltaX = touchPos.x - transform.position.x;
+                    deltaY = touchPos.y - transform.position.y;
+                    break;
+
+                case UnityEngine.TouchPhase.Moved:
+                    Vector2 newPos = new Vector2();
+                    newPos.x = Mathf.Clamp(touchPos.x - deltaX, minBounds.x + padding, maxBounds.x - padding);
+                    newPos.y = Mathf.Clamp(touchPos.y - deltaY, minBounds.y + padding * 3, maxBounds.y - padding * 10);
+                    transform.DOMove(newPos, 0.5f);
+                    break;
+
+                case UnityEngine.TouchPhase.Ended:
+
+                    break;
+            }
+
+            if (touch.tapCount == 1)
+            {
+                shooter.isFiring = true;
+            }
+
+        }
+        
     }
 
 }

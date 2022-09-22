@@ -34,7 +34,7 @@ public class TopEnemySpawner : MonoBehaviour
     }
     void Start()
     {
-        levelIndex = levelManager.LevelCount();
+        levelIndex = levelManager.LevelCount() -1;
         Spawn();
     }
 

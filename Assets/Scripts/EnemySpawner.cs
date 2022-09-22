@@ -56,8 +56,9 @@ public class EnemySpawner : MonoBehaviour
         }
         looping = false;
         yield return new WaitForSeconds(timeBetweenWaves);
+        yield return new WaitForSeconds(5);
         Instantiate(topEnemiesSpawner, transform.position, Quaternion.identity);
-        //count++;
+        levelManager.levelCount++;
         
     }
     private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)

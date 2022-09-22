@@ -40,8 +40,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void LoadNextLevel()
-    {
-        levelCount++; 
+    {         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

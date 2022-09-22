@@ -48,12 +48,10 @@ MonoBehaviour:
   listBossList:
     bossesList:
     - bosses:
-      - {fileID: 8741527973969981202, guid: b53f991f7b343f2409c7101995c81db4, type: 3}
+      - {fileID: 8741527973969981202, guid: 21ef52f5a5cd6004bba05431747aa475, type: 3}
       - {fileID: 8741527973969981202, guid: 21ef52f5a5cd6004bba05431747aa475, type: 3}
     - bosses:
       - {fileID: 8741527973969981202, guid: ec407d84bdf8b9f489f6e73a94a35c49, type: 3}
-  listOfBosses:
-    bosses: []
   enemy:
   - {fileID: 8741527973969981202, guid: 21ef52f5a5cd6004bba05431747aa475, type: 3}
   spawnedEnemies: 0
