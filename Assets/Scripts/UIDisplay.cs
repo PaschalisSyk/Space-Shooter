@@ -8,18 +8,26 @@ using DG.Tweening;
 public class UIDisplay : MonoBehaviour
 {
     ScoreKeeper scoreKeeper;
+    LevelManager levelManager;
     [SerializeField] Health health;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] Slider slider;
-    [SerializeField] CanvasGroup endLevelPanel;
+    [SerializeField] CanvasGroup endLevelSign;
     [SerializeField] RectTransform levelComplete;
     [SerializeField] Image image;
+    [SerializeField] CanvasGroup endLevelPanel;
     float maxHealth = 50;
+    bool isOn;
+    Player player;
 
 
     private void Awake()
     {
         health = FindObjectOfType<Health>();
+        levelManager = FindObjectOfType<LevelManager>();
+        player = FindObjectOfType<Player>();
+        endLevelPanel.gameObject.SetActive(false);
+        endLevelSign.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -45,19 +53,48 @@ public class UIDisplay : MonoBehaviour
 
     public void EndLevelUI()
     {
-
-        endLevelPanel.DOFade(1, 2);
-        levelComplete.DOAnchorPosY(90, 2);
-        Invoke("FadeOut",3);
+        endLevelSign.gameObject.SetActive(true);
+        endLevelSign.DOFade(1, 2f).SetLink(endLevelPanel.gameObject);
+        levelComplete.DOAnchorPosY(400, 2).SetLink(gameObject);
+        StartCoroutine(EndLevelPaneActivation());
     }
 
     void FadeIn()
     {
-        image.DOFade(0, 2);
+        if(image !=null)
+           image.DOFade(0, 2).SetLink(image.gameObject).SetEase(Ease.InOutSine).SetAutoKill(true);
     }
 
     void FadeOut()
     {
-        image.DOFade(1, 2);
+        if (image != null)
+            image.DOFade(1, 2).SetLink(image.gameObject).SetAutoKill(true);
     }
+
+    IEnumerator EndLevelPaneActivation()
+    {
+        yield return new WaitForSeconds(2.5f);
+        endLevelPanel.gameObject.SetActive(true);
+        isOn = true;
+        endLevelPanel.DOFade(1, 4).SetLink(gameObject);
+    }
+
+    void FadeEndPanel()
+    {
+        StartCoroutine(EndPanelFade());
+    }
+
+    IEnumerator EndPanelFade()
+    {
+        endLevelPanel.DOFade(0, 1).SetAutoKill(true).SetLink(gameObject);
+        FadeOut();
+        yield return new WaitForSeconds(2);
+        levelManager.LoadNextLevel();
+    }
+
+    public bool IsOn()
+    {
+        return isOn;
+    }
+
 }

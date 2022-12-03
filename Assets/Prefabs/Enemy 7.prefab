@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  health: 50
-  score: 25
+  health: 100
+  score: 50
   hitEffect: {fileID: 4711078963350726575, guid: 80706d0cfbed3f8468779eba3e372507,
     type: 3}
   _shield: {fileID: 0}

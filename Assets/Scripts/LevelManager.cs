@@ -7,8 +7,9 @@ public class LevelManager : MonoBehaviour
 {
     static LevelManager instance;
 
-    [SerializeField] float sceneLoadDelay = 2;
+    [SerializeField] float sceneLoadDelay = 6;
     [SerializeField] public int levelCount = 0;
+    [SerializeField] int gunIndex = 0;
 
     ScoreKeeper scoreKeeper;
 
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
     {
         ManageSingleton();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        LevelCounter();
     }
 
     public void LoadGame()
@@ -69,4 +71,28 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void LevelCounter()
+    {
+        levelCount = SceneManager.GetActiveScene().buildIndex - 1;
+
+        if (levelCount <= 0)
+        {
+            levelCount = 0;
+        }
+
+    }
+
+    public int GetGunIndex()
+    {
+        return gunIndex;
+    }
+
+    public void UpdateGun()
+    {
+        if(gunIndex > 2)
+        {
+            return;
+        }
+        gunIndex++;
+    }
 }

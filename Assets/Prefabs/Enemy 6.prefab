@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3e37e4b4b0ce1e547907463d96cc43b2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7311321, b: 0.89337194, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0
@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  health: 50
-  score: 25
+  health: 150
+  score: 200
   hitEffect: {fileID: 4711078963350726575, guid: 80706d0cfbed3f8468779eba3e372507,
     type: 3}
   _shield: {fileID: 0}

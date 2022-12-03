@@ -4,38 +4,28 @@ using UnityEngine;
 
 public class TopEnemySpawner : MonoBehaviour
 {
-    [System.Serializable]
-    public class Bosses
-    {
-        public List<GameObject> bosses;
-    }
-    [System.Serializable]
-    public class BossList
-    {
-        public List<Bosses> bossesList;
-    }
+    [SerializeField] List<TopEnemies> topEnemies;
 
-    public BossList listBossList = new BossList();
-
-    [SerializeField] List<GameObject> enemy;
     UIDisplay display;
 
     EnemySpawner enemySpawner;
     public int spawnedEnemies;
     LevelManager levelManager;
     int levelIndex = 0;
+    Player player;
 
     private void Awake()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
         levelManager = FindObjectOfType<LevelManager>();
         display = FindObjectOfType<UIDisplay>();
+        player = FindObjectOfType<Player>();
 
     }
     void Start()
     {
         levelIndex = levelManager.LevelCount() -1;
-        Spawn();
+        Spawn(topEnemies[levelIndex]);
     }
 
     void Update()
@@ -43,20 +33,31 @@ public class TopEnemySpawner : MonoBehaviour
         CheckInstances();
     }
 
-    void SpawnEnemies()
+    void SpawnEnemies(TopEnemies topEnemies)
     {
+        int index = 0;
+
+        for (int i = 0; i < topEnemies.GetSpawnPoints().Count; i++)
+        {
+            var spawnPoint = Instantiate(topEnemies.GetSpawnPoints()[i], topEnemies.GetSpawnPoints()[i].transform.position, Quaternion.identity);
+            spawnPoint.transform.SetParent(this.transform);
+        }
+
         foreach (Transform child in gameObject.transform)
         {
-            GameObject instance = Instantiate(listBossList.bossesList[levelIndex].bosses[Random.Range(0, listBossList.bossesList[levelIndex].bosses.Count)] , child.position, Quaternion.identity);
+            
+            //GameObject instance = Instantiate(listBossList.bossesList[levelIndex].bosses[Random.Range(0, listBossList.bossesList[levelIndex].bosses.Count)] , child.position, Quaternion.identity);
+            GameObject instance = Instantiate(topEnemies.GetBosses()[index], child.position, Quaternion.identity);
             spawnedEnemies++;
+            index++;
         }
     }
 
-    void Spawn()
+    void Spawn(TopEnemies topEnemies)
     {
         if(!enemySpawner.GetLooping())
         {
-            SpawnEnemies();
+            SpawnEnemies(topEnemies);
         }
     }
 
@@ -75,17 +76,14 @@ public class TopEnemySpawner : MonoBehaviour
         if (spawnedEnemies <= 0)
         {
             StartCoroutine(EndLevel());
-            /*enemySpawner.Level = 2;
-            Invoke("Destroy", 2);*/
         }
     }
 
     IEnumerator EndLevel()
     {
         display.EndLevelUI();
-        yield return new WaitForSeconds(5f);
-        levelManager.LoadNextLevel();
-
+        player.IsFiring();
+        yield return new WaitForSeconds(2f);
     }
 
 }

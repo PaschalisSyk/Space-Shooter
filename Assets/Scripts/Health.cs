@@ -9,7 +9,6 @@ public class Health : MonoBehaviour
     [SerializeField] int health = 50;
     [SerializeField] int score = 50;
     [SerializeField] ParticleSystem hitEffect;
-    [SerializeField] GameObject _shield;
 
     [SerializeField] bool applyCameraShake;
 
@@ -17,7 +16,6 @@ public class Health : MonoBehaviour
     AudioPlayer audioPlayer;
     ScoreKeeper scoreKeeper;
     LevelManager levelManager;
-    Shield shield;
     Player player;
 
 
@@ -27,7 +25,6 @@ public class Health : MonoBehaviour
         audioPlayer = FindObjectOfType<AudioPlayer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         levelManager = FindObjectOfType<LevelManager>();
-        shield = FindObjectOfType<Shield>();
         player = FindObjectOfType<Player>();
     }
 

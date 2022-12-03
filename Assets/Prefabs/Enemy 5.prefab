@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  health: 50
-  score: 25
+  health: 75
+  score: 50
   hitEffect: {fileID: 4711078963350726575, guid: 80706d0cfbed3f8468779eba3e372507,
     type: 3}
   _shield: {fileID: 0}
@@ -183,9 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 1629467150465319734, guid: 71c65e497d0ad3e4f9b55f8cb6b9c35a,
     type: 3}
+  gunPrefab: []
   projectileSpeed: 10
-  baseProjectileFiringPeriod: 1
+  baseProjectileFiringPeriod: 1.5
   projectileLifeTime: 5
+  isPlayer: 0
   useAI: 1
   firingRangeVariance: 0.6
   minimunFiringRange: 0.9

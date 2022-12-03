@@ -10,16 +10,16 @@ public class EnemySpawner : MonoBehaviour
         public List<WaveConfig> _waves;
     }
     [System.Serializable]
-    public class WavesList
+    public class Levels
     {
-        public List<Waves> wavesList;
+        public List<Waves> levels;
     }
 
-    public WavesList listWavesList = new WavesList();
+    public Levels listWavesList = new Levels();
 
 
-    [SerializeField] List<WaveConfig> waveConfigs;
-    [SerializeField] List<WaveConfig> wave2;
+    //[SerializeField] List<WaveConfig> waveConfigs;
+    //[SerializeField] List<WaveConfig> wave2;
     [SerializeField] int startingWave = 0;
     [SerializeField] public bool looping = false;
     [SerializeField] GameObject topEnemiesSpawner;
@@ -30,17 +30,17 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
-        count = levelManager.levelCount;
-
     }
 
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(1f);
+        count = levelManager.levelCount;
+
+        yield return new WaitForSeconds(4f);
         
         do
         {
-            yield return StartCoroutine(SpawnAllWaves(listWavesList.wavesList[count]._waves));
+            yield return StartCoroutine(SpawnAllWaves(listWavesList.levels[count]._waves));
 
         } while (looping);
     }
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         }
         looping = false;
         yield return new WaitForSeconds(timeBetweenWaves);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         Instantiate(topEnemiesSpawner, transform.position, Quaternion.identity);
         levelManager.levelCount++;
         
@@ -74,10 +74,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public int GetWavesCount()
+    /*public int GetWavesCount()
     {
         return waveConfigs.Count;
-    }
+    }*/
 
     public bool GetLooping()
     {
@@ -86,7 +86,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnWaves(int index)
     {
-        StartCoroutine(SpawnAllWaves(listWavesList.wavesList[index]._waves));
+        StartCoroutine(SpawnAllWaves(listWavesList.levels[index]._waves));
     }
 
 }

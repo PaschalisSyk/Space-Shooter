@@ -6,9 +6,11 @@ public class Shooter : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] GameObject laserPrefab;
+    [SerializeField] GameObject[] gunPrefab;
     [SerializeField] float projectileSpeed = 10;
     [SerializeField] float baseProjectileFiringPeriod = 0.2f;
     [SerializeField] float projectileLifeTime = 5f;
+    [SerializeField] bool isPlayer;
 
     [Header("AI")]
     [SerializeField] bool useAI;
@@ -19,13 +21,18 @@ public class Shooter : MonoBehaviour
 
     Coroutine firingCoroutine;
     AudioPlayer audioPlayer;
+    LevelManager levelManager;
+    float timeToNextProjectile;
+    int index;
 
     private void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
+        levelManager = FindObjectOfType<LevelManager>();
+
+        index = levelManager.GetGunIndex();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if(useAI)
@@ -34,7 +41,6 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         Fire();
@@ -44,6 +50,7 @@ public class Shooter : MonoBehaviour
     {
         if(isFiring && firingCoroutine == null)
         {
+            
             firingCoroutine = StartCoroutine(FireContinuously());
         }
         else if(!isFiring && firingCoroutine != null)
@@ -55,6 +62,10 @@ public class Shooter : MonoBehaviour
 
     IEnumerator FireContinuously()
     {
+        if (isPlayer)
+        {
+            laserPrefab = gunPrefab[index];
+        }
         while (true)
         {
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -67,7 +78,7 @@ public class Shooter : MonoBehaviour
                 rb.velocity = transform.up * projectileSpeed;
             }
 
-            float timeToNextProjectile = Random.Range(baseProjectileFiringPeriod - firingRangeVariance,
+            timeToNextProjectile = Random.Range(baseProjectileFiringPeriod - firingRangeVariance,
                                                       baseProjectileFiringPeriod + firingRangeVariance);
 
             timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimunFiringRange, float.MaxValue);
@@ -77,4 +88,15 @@ public class Shooter : MonoBehaviour
             yield return new WaitForSeconds(timeToNextProjectile);
         }
     }
+
+    public float TimeForNext()
+    {
+        return timeToNextProjectile;
+    }
+
+    public void UpgradeShooting()
+    {
+        baseProjectileFiringPeriod -= baseProjectileFiringPeriod * 0.1f;
+    }
+
 }
