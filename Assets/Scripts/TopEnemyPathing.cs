@@ -8,6 +8,7 @@ public class TopEnemyPathing : MonoBehaviour
     [SerializeField] float movespeed;
     TopEnemySpawner spawner;
     Vector2 target;
+    Vector2 offset = new Vector2(0, 2);
     bool _active;
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class TopEnemyPathing : MonoBehaviour
         {
             transform.up = player.transform.position - transform.position;
             target = player.transform.position;
-            this.transform.position = Vector2.Lerp(transform.position, target, 0.1f * movespeed * Time.deltaTime);
+            this.transform.position = Vector2.Lerp(transform.position, target + offset, 0.1f * movespeed * Time.deltaTime);
         }
     }
 

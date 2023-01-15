@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateGun()
     {
-        if(gunIndex > 2)
+        if(gunIndex >= 2)
         {
             return;
         }
