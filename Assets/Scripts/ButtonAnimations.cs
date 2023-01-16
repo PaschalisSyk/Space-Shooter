@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class ButtonAnimations : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI text;
     public void OnButtonClick()
     {
         GameObject children = transform.GetChild(1).gameObject;
         Color color = children.GetComponent<Image>().color;
 
+        text.DOFade(0, 1);
         GetComponent<Image>().DOColor(color, 0.5f).SetLink(gameObject);
         GetComponent<RectTransform>().DOLocalRotate(new Vector3(0, 360, 0), 0.15f,RotateMode.FastBeyond360).SetEase(Ease.InFlash).SetLoops(3).OnComplete(
             () => GetComponent<RectTransform>().DOLocalRotate(new Vector3(0, 0, 0), 0.15f)).OnComplete(

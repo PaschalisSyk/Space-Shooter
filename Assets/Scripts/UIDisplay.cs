@@ -12,7 +12,7 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] Health health;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] Slider slider;
-    [SerializeField] CanvasGroup endLevelSign;
+    [SerializeField] GameObject endLevelSign;
     [SerializeField] RectTransform levelComplete;
     [SerializeField] Image image;
     [SerializeField] CanvasGroup endLevelPanel;
@@ -31,6 +31,7 @@ public class UIDisplay : MonoBehaviour
     }
     private void Start()
     {
+        maxHealth = health.GetHealth();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         slider.value = maxHealth;
         FadeIn();
@@ -53,9 +54,12 @@ public class UIDisplay : MonoBehaviour
 
     public void EndLevelUI()
     {
-        endLevelSign.gameObject.SetActive(true);
-        endLevelSign.DOFade(1, 2f).SetLink(endLevelPanel.gameObject);
-        levelComplete.DOAnchorPosY(400, 2).SetLink(gameObject);
+        //endLevelSign.gameObject.SetActive(true);
+        //endLevelSign.DOFade(1, 2f).SetLink(endLevelPanel.gameObject).OnComplete(() => endLevelSign.alpha = 1)
+        //    .OnComplete(() => endLevelSign.DOFade(0, 1).SetEase(Ease.OutSine));
+        //levelComplete.DOAnchorPosY(840, 2).SetEase(Ease.InSine).SetLink(gameObject);
+        //textMeshPro.DOFade(1, 2).OnComplete(() => textMeshPro.DOFade(0, 1));
+        endLevelSign.SetActive(true);
         StartCoroutine(EndLevelPaneActivation());
     }
 
@@ -73,10 +77,11 @@ public class UIDisplay : MonoBehaviour
 
     IEnumerator EndLevelPaneActivation()
     {
+        
         yield return new WaitForSeconds(2.5f);
         endLevelPanel.gameObject.SetActive(true);
         isOn = true;
-        endLevelPanel.DOFade(1, 4).SetLink(gameObject);
+        endLevelPanel.DOFade(1, 2).SetLink(gameObject);
     }
 
     void FadeEndPanel()

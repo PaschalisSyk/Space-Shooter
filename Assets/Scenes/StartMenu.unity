@@ -878,7 +878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1539920326
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1384,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2138435444
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,9 +1466,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1370617309}
     - target: {fileID: 1519155714, guid: 0cf291f2acd2bdd4faaf665feadc7b59, type: 3}
-      propertyPath: spaceShip
+      propertyPath: spaceShip.Array.data[0]
+      value: 
+      objectReference: {fileID: 2138435443}
+    - target: {fileID: 1519155714, guid: 0cf291f2acd2bdd4faaf665feadc7b59, type: 3}
+      propertyPath: spaceShip.Array.data[1]
       value: 
       objectReference: {fileID: 1539920325}
+    - target: {fileID: 1563093531, guid: 0cf291f2acd2bdd4faaf665feadc7b59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1994367504, guid: 0cf291f2acd2bdd4faaf665feadc7b59, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1481,7 +1489,7 @@ PrefabInstance:
     - target: {fileID: 4934536368005920358, guid: 0cf291f2acd2bdd4faaf665feadc7b59,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5602817278503149237, guid: 0cf291f2acd2bdd4faaf665feadc7b59,
         type: 3}
@@ -1603,6 +1611,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1726484671}
+    - target: {fileID: 6827970092867807038, guid: 0cf291f2acd2bdd4faaf665feadc7b59,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862568568752655898, guid: 0cf291f2acd2bdd4faaf665feadc7b59,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 109.999985
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

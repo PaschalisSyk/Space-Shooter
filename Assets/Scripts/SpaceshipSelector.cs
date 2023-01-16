@@ -53,11 +53,11 @@ public class SpaceshipSelector : MonoBehaviour
         //load the game or move to the next screen
         //}
 
-        if (currentSpaceshipIndex == 0)
-        {
-            spaceshipPanels[0].gameObject.SetActive(true);
-        }
-        else spaceshipPanels[1].gameObject.SetActive(true);
+        //if (currentSpaceshipIndex == 0)
+        //{
+        //    spaceshipPanels[0].gameObject.SetActive(true);
+        //}
+        //else spaceshipPanels[1].gameObject.SetActive(true);
     }
 
     //public void UpdateUI()

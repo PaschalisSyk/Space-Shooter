@@ -7,12 +7,15 @@ using DG.Tweening;
 public class StartMenuUI : MonoBehaviour
 {
     LevelManager levelManager;
+    SpaceshipSelector spaceshipSelector;
     [SerializeField] Transform startPanel;
-    [SerializeField] GameObject spaceShip;
+    [SerializeField] GameObject[] spaceShip;
     [SerializeField] Image image;
+    [SerializeField] GameObject spaceshipPanel;
 
     private void Awake()
     {
+        spaceshipSelector = FindObjectOfType<SpaceshipSelector>();
         levelManager = FindObjectOfType<LevelManager>();
         image.DOFade(0, 4f).SetEase(Ease.InOutSine);
     }
@@ -24,7 +27,8 @@ public class StartMenuUI : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        startPanel.transform.DOScaleY(0, 1f).SetEase(Ease.Flash).SetAutoKill(true);
+        //startPanel.transform.DOScaleY(0, 1f).SetEase(Ease.Flash).SetAutoKill(true);
+        spaceshipPanel.transform.DOScaleY(0, 0.5f).SetEase(Ease.Flash).SetAutoKill(true);
         yield return new WaitForSeconds(1);
         StartAnim();
         yield return new WaitForSeconds(3);
@@ -33,6 +37,12 @@ public class StartMenuUI : MonoBehaviour
 
     void StartAnim()
     {
-        spaceShip.transform.DOMoveY(50, 3).SetEase(Ease.InFlash).SetAutoKill(true);
+        spaceShip[spaceshipSelector.currentSpaceshipIndex].transform.DOMoveY(50, 3).SetEase(Ease.InFlash).SetAutoKill(true);
+    }
+
+    public void NewGameButton()
+    {
+        startPanel.gameObject.SetActive(false);
+        spaceshipPanel.SetActive(true);
     }
 }

@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d90c52b0315b3b4c9f598c7c6a4a251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 15
   padding: 0.5
   shieldied: 0
 --- !u!50 &5746704500577348541
@@ -5322,7 +5322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
-  health: 50
+  health: 75
   score: 0
   hitEffect: {fileID: 4711078963350726575, guid: 80706d0cfbed3f8468779eba3e372507,
     type: 3}

@@ -25,6 +25,10 @@ public class TopEnemySpawner : MonoBehaviour
     void Start()
     {
         levelIndex = levelManager.LevelCount() -1;
+        if(levelIndex < 0)
+        {
+            levelIndex = 0;
+        }
         Spawn(topEnemies[levelIndex]);
     }
 
