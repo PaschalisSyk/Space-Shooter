@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TopEnemySpawner : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class TopEnemySpawner : MonoBehaviour
     }
     void Start()
     {
-        levelIndex = levelManager.LevelCount() -1;
-        if(levelIndex < 0)
+        levelIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        if (levelIndex < 0)
         {
             levelIndex = 0;
         }

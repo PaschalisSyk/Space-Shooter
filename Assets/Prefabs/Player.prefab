@@ -406,6 +406,9 @@ MonoBehaviour:
   moveSpeed: 10
   padding: 0.5
   shieldied: 0
+  stats:
+  - {fileID: 11400000, guid: 0e7fb84510da64241adfbc39e69009d3, type: 2}
+  - {fileID: 11400000, guid: da8a6eaf3c367d6478dcd7b67c0c3528, type: 2}
 --- !u!50 &5746704500577348541
 Rigidbody2D:
   serializedVersion: 4

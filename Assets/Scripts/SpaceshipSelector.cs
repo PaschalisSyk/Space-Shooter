@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class SpaceshipSelector : MonoBehaviour
 {
     public GameObject[] spaceshipPanels;
+    public TextMeshProUGUI[] spaceshipNames;
     public int currentSpaceshipIndex = 0;
+    public Color selectionColor;
+    //public Button selectButton;
     //public Button nextButton;
     //public Button prevButton;
     //public Button selectButton;
@@ -46,10 +50,15 @@ public class SpaceshipSelector : MonoBehaviour
 
     public void SelectSpaceship()
     {
+        SelectAnim();
+
+        PlayerPrefs.SetInt("SelectedSpaceship", currentSpaceshipIndex);
+        PlayerPrefs.Save();
+
+
         //if (!spaceshipLocked[currentSpaceshipIndex])
         //{
-            PlayerPrefs.SetInt("SelectedSpaceship", currentSpaceshipIndex);
-            PlayerPrefs.Save();
+
         //load the game or move to the next screen
         //}
 
@@ -58,6 +67,15 @@ public class SpaceshipSelector : MonoBehaviour
         //    spaceshipPanels[0].gameObject.SetActive(true);
         //}
         //else spaceshipPanels[1].gameObject.SetActive(true);
+    }
+
+    void SelectAnim()
+    {
+        //selectButton.transform.GetChild(0).gameObject.SetActive(false);
+        //selectButton.GetComponent<Image>().DOFade(0, 0.5f);
+        spaceshipNames[currentSpaceshipIndex].DOColor(selectionColor, 0.5f).OnComplete(() => spaceshipNames[currentSpaceshipIndex].DOFade(0, 1));
+        spaceshipPanels[currentSpaceshipIndex].transform.DOScale(1f, 1f).SetLoops(2 , LoopType.Yoyo).SetEase(Ease.InSine);
+
     }
 
     //public void UpdateUI()

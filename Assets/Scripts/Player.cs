@@ -34,8 +34,12 @@ public class Player : MonoBehaviour
     private float doubleTapThreshold = 0.3f;
     private int tapCount;
 
+    [SerializeField] PlayerStats[] stats;
+
     private void Awake()
     {
+        Initialize();
+
         shooter = GetComponent<Shooter>();
         color = GetComponent<SpriteRenderer>().color;
         display = FindObjectOfType<UIDisplay>();
@@ -264,6 +268,16 @@ public class Player : MonoBehaviour
             shieldied = true;
             tapCount = 0;
         }
+
+    }
+
+    void Initialize()
+    {
+        int spaceshipIndex = PlayerPrefs.GetInt("SelectedSpaceship");
+
+        GetComponent<SpriteRenderer>().sprite = stats[spaceshipIndex].GetSprite();
+        GetComponent<SpriteRenderer>().color = stats[spaceshipIndex].GetColor();
+        moveSpeed = stats[spaceshipIndex].GetMoveSpeed();
 
     }
 }

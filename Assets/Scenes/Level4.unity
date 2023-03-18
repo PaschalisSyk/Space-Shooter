@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: -1866786646901004129, guid: b94c5b967a2ab11428ecb9f3922eba76,
         type: 3}
       propertyPath: m_Antialiasing
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1866786646901004129, guid: b94c5b967a2ab11428ecb9f3922eba76,
         type: 3}
@@ -920,6 +920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4286067780896254289, guid: 87bc0acd5ca803847a5e633a9a453bef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9073606640482175015, guid: 87bc0acd5ca803847a5e633a9a453bef,
         type: 3}
       propertyPath: gunIndex
@@ -930,6 +935,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87bc0acd5ca803847a5e633a9a453bef, type: 3}
+--- !u!114 &1754094412 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9073606640482175015, guid: 87bc0acd5ca803847a5e633a9a453bef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1754094411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f68ec7f652a404697849eab239be2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2013279829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -938,10 +955,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3191372429015601882, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1754094412}
+    - target: {fileID: 3191372429015601882, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UpdateLevelCount
+      objectReference: {fileID: 0}
     - target: {fileID: 4377680049447044773, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
         type: 3}
       propertyPath: m_Name
       value: GameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4377680049447044773, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4377680049447044776, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
         type: 3}
@@ -1053,6 +1085,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2024051450}
+    - target: {fileID: 4377680050095207703, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4377680050419364276, guid: d3aeaeb7ce35d744f8a9fc6b3a35952e,
         type: 3}
       propertyPath: m_AnchorMax.x

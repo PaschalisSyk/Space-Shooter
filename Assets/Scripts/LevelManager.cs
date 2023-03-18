@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     static LevelManager instance;
 
     [SerializeField] float sceneLoadDelay = 6;
-    [SerializeField] public int levelCount = 0;
+    [SerializeField] public int levelCount;
     [SerializeField] int gunIndex = 0;
 
     ScoreKeeper scoreKeeper;
@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     {
         ManageSingleton();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        LevelCounter();
+        //LevelCounter();
     }
 
     public void LoadGame()
@@ -46,15 +46,22 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void LoadLevel(int level)
+    {
+        // SceneManager.LoadScene(level);
+        StartCoroutine(WaitAndLoad(level, 1));
+    }
+
     IEnumerator WaitAndLoad(string sceneName , float delay)
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName);
     }
 
-    public int LevelCount()
+    IEnumerator WaitAndLoad(int level, float delay)
     {
-        return levelCount;
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(level);
     }
 
     void ManageSingleton()
@@ -71,16 +78,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void LevelCounter()
-    {
-        levelCount = SceneManager.GetActiveScene().buildIndex - 1;
+    //void LevelCounter()
+    //{
+    //    levelCount = SceneManager.GetActiveScene().buildIndex - 1;
 
-        if (levelCount <= 0)
-        {
-            levelCount = 0;
-        }
+    //    if (levelCount <= 0)
+    //    {
+    //        levelCount = 0;
+    //    }
 
-    }
+    //}
 
     public int GetGunIndex()
     {
@@ -95,4 +102,9 @@ public class LevelManager : MonoBehaviour
         }
         gunIndex++;
     }
+
+    //public int LevelCount()
+    //{
+    //    return levelCount;
+    //}
 }

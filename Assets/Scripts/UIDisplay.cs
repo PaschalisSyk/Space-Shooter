@@ -23,15 +23,18 @@ public class UIDisplay : MonoBehaviour
 
     private void Awake()
     {
-        health = FindObjectOfType<Health>();
+        //health = FindObjectOfType<Health>();
         levelManager = FindObjectOfType<LevelManager>();
         player = FindObjectOfType<Player>();
+        
         endLevelPanel.gameObject.SetActive(false);
         endLevelSign.gameObject.SetActive(false);
+
     }
     private void Start()
     {
-        maxHealth = health.GetHealth();
+        //player = levelManager.GetPlayer();
+        maxHealth = player.GetComponent<Health>().GetHealth();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
         slider.value = maxHealth;
         FadeIn();
@@ -40,13 +43,18 @@ public class UIDisplay : MonoBehaviour
     void Update()
     {
         LerpHealth();
-        scoreText.text = scoreKeeper.GetScore().ToString("000000000");
+        //scoreText.text = scoreKeeper.GetScore().ToString("000000000");
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateScore();
     }
 
     void LerpHealth()
     {
         float startingHealth = slider.value;
-        float targetHealth = health.GetHealth();
+        float targetHealth = player.GetComponent<Health>().GetHealth();
 
 
         slider.value = Mathf.Lerp(slider.value, targetHealth / maxHealth, 3f * Time.deltaTime);
@@ -100,6 +108,27 @@ public class UIDisplay : MonoBehaviour
     public bool IsOn()
     {
         return isOn;
+    }
+
+    public void UpdateScore()
+    {
+        StartCoroutine(IncrementScore());
+
+    }
+
+    IEnumerator IncrementScore()
+    {
+        if(scoreKeeper.updateOn)
+        {
+            while (scoreKeeper.previousScore < scoreKeeper.GetScore())
+            {
+                scoreKeeper.previousScore += 1;
+                scoreText.text = scoreKeeper.previousScore.ToString("000000000");
+                yield return new WaitForFixedUpdate();
+            }
+            scoreKeeper.updateOn = false;
+        }
+
     }
 
 }

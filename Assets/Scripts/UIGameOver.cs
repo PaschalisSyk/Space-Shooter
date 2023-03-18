@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UIGameOver : MonoBehaviour
 {
@@ -18,9 +19,10 @@ public class UIGameOver : MonoBehaviour
     }
     void Start()
     {
+        GetComponent<CanvasGroup>().DOFade(1, 1);
         Button btn = button.GetComponent<Button>();
         btn.onClick.AddListener(Restart);
-        scoreText.text = ("You Scored:\n " + scoreKeeper.GetScore().ToString("000000000"));
+        scoreText.text = ("You Scored:\n " + scoreKeeper.GetScore().ToString("00000"));
     }
     
     void Restart()

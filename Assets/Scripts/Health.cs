@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Destruction()
+    void Destruction()
     {
         if(!isPlayer)
         {

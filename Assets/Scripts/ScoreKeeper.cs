@@ -5,6 +5,9 @@ using UnityEngine;
 public class ScoreKeeper : MonoBehaviour
 {
     int score;
+    public int previousScore;
+    public bool updateOn = false;
+    //UIDisplay uIDisplay;
 
     static ScoreKeeper instance;
 
@@ -35,7 +38,10 @@ public class ScoreKeeper : MonoBehaviour
 
     public void ModifyScore(int value)
     {
+        previousScore = score;
         score += value;
+        //uIDisplay.UpdateScore();
+        updateOn = true;
         Mathf.Clamp(score, 0, int.MaxValue);
         print(score);
     }
@@ -44,4 +50,5 @@ public class ScoreKeeper : MonoBehaviour
     {
         score = 0;
     }
+
 }
